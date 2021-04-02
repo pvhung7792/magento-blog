@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="opentechiz_blog_post" resource="default" engine="innodb" comment="OpenTechiz Blog Post">
+        <column xsi:type="int" name="post_id" padding="10" unsigned="true" nullable="false" comment="Entity Id"/>
+        <column xsi:type="varchar" name="url_key" nullable="true" default="null" length="100" comment="Url key"/>
+        <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Blog title"/>
+        <column xsi:type="text" name="content" nullable="false" comment="Blog content"/>
+        <column xsi:type="smallint" name="is_active" nullable="false" default="1" comment="Is post active?"/>
+        <column xsi:type="timestamp" name="creation_time" nullable="false" comment="Creation time"/>
+        <column xsi:type="timestamp" name="update_time" nullable="false" comment="Update time"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="post_id"/>
+        </constraint>
+        <index referenceId="INDEX_URL_KEY" indexType="btree">
+            <column name="url_key"/>
+        </index>
+    </table>
+</schema>
+

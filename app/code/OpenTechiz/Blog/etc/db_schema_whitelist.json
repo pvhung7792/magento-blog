@@ -1,0 +1,19 @@
+{
+    "opentechiz_blog_post": {
+        "column": {
+            "post_id": true,
+            "url_key": true,
+            "title": true,
+            "content": true,
+            "is_active": true,
+            "creation_time": true,
+            "update_time": true
+        },
+        "index": {
+            "OPENTECHIZ_BLOG_POST_URL_KEY": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}
