@@ -2,22 +2,22 @@
 
 namespace OpenTechiz\Blog\Model;
 
-use Magento\Framework\Model\AbstractExtensibleModel;
+//use Magento\Framework\Model\AbstractExtensibleModel;
 use OpenTechiz\Blog\Api\Data\PostInterface;
 
 /**
  * Class Post
  * @package OpenTechiz\Blog\Model
  */
-class Post extends AbstractExtensibleModel implements PostInterface
+class Post extends \Magento\Framework\Model\AbstractModel implements PostInterface
 {
-    const POST_ID = 'post_id';
+    /*const POST_ID = 'post_id';
     const URL_KEY = 'url_key';
     const TITLE = 'title';
     const CONTENT = 'content';
     const CREATION_TIME = 'creation_time';
     const UPDATE_TIME = 'update_time';
-    const IS_ACTIVE = 'is_active';
+    const IS_ACTIVE = 'is_active';*/
 
     protected function _construct()
     {
@@ -87,6 +87,13 @@ class Post extends AbstractExtensibleModel implements PostInterface
     {
         $this->setData(self::POST_ID, $id);
         return $this;
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function getById($id)
+    {
+        return getData($key = '',$id);
     }
 
     /**

@@ -2,6 +2,7 @@
 namespace OpenTechiz\Blog\Api\Data;
 
 use Magento\Framework\Api\ExtensibleDataInterface;
+use Magento\Framework\Model\AbstractModel;
 
 /**
  * Interface CustomInterface
@@ -10,13 +11,13 @@ use Magento\Framework\Api\ExtensibleDataInterface;
 
 interface PostInterface extends ExtensibleDataInterface
 {
-    /*const POST_ID = 'post_id';
+    const POST_ID = 'post_id';
     const URL_KEY = 'url_key';
     const TITLE = 'title';
     const CONTENT = 'content';
     const CREATION_TIME = 'creation_time';
     const UPDATE_TIME = 'update_time';
-    const IS_ACTIVE = 'is_active';*/
+    const IS_ACTIVE = 'is_active';
 
     /**
      * @return int
@@ -58,6 +59,13 @@ interface PostInterface extends ExtensibleDataInterface
      * @return $this
      */
     public function setId($id);
+
+    /**
+     * @param integer $modelId
+     * @param null|string $field
+     * @return $this
+     */
+    public function load($modelId, $field = null);
 
     /**
      * @param string $url_key

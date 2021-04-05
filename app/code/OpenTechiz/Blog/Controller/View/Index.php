@@ -1,5 +1,5 @@
 <?php
-namespace OpenTechiz\Blog\Controller\Index;
+namespace OpenTechiz\Blog\Controller\View;
 
 class Index extends \Magento\Framework\App\Action\Action
 {

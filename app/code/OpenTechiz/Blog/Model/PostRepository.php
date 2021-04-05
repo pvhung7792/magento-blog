@@ -28,22 +28,22 @@ class PostRepository implements \OpenTechiz\Blog\Api\PostRepositoryInterface
     protected $collectionFactory;
 
     /**
-     * @var \OpenTechiz\Blog\Api\Data\PostSearchResultInterfaceFactory
+     * @var \OpenTechiz\Blog\Api\Data\PostSearchResultInterface
      */
     protected $postResultInterfaceFactory;
 
     /**
      * CustomRepository constructor.
      * @param \OpenTechiz\Blog\Model\PostFactory $postFactory
-     * @param ResourceModel\Blog $customResource
-     * @param ResourceModel\Blog\CollectionFactory $collectionFactory
-     * @param \OpenTechiz\Blog\Api\Data\PostSearchResultInterfaceFactory $postResultInterfaceFactory
+     * @param \OpenTechiz\Blog\Model\ResourceModel\Post $customResource
+     * @param \OpenTechiz\Blog\Model\ResourceModel\Post\CollectionFactory $collectionFactory
+     * @param \OpenTechiz\Blog\Api\Data\PostSearchResultInterface $postResultInterfaceFactory
      */
     public function __construct(
         \OpenTechiz\Blog\Model\PostFactory $postFactory,
         \OpenTechiz\Blog\Model\ResourceModel\Post $postResource,
         \OpenTechiz\Blog\Model\ResourceModel\Post\CollectionFactory $collectionFactory,
-        \OpenTechiz\Blog\Api\Data\PostSearchResultInterfaceFactory $postResultInterfaceFactory
+        \OpenTechiz\Blog\Api\Data\PostSearchResultInterface $postResultInterfaceFactory
     ) {
         $this->postFactory = $postFactory;
         $this->postResource = $postResource;

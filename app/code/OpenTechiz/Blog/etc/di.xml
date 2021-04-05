@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="OpenTechiz\Post\Api\PostRepositoryInterface" type="OpenTechiz\Post\Model\PostRepository"/>
+    <preference for="OpenTechiz\Post\Api\Data\PostInterface" type="OpenTechiz\Post\Model\Post"/>
+    <preference for="OpenTechiz\Post\Api\Data\PostSearchResultInterface" type="OpenTechiz\Post\Model\PostSearchResult"/>
+</config>

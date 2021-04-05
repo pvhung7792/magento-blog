@@ -1,0 +1,17 @@
+<h2><?php echo __('Latest Blog Posts')?></h2>
+
+<ul class="blog-post-list">
+    <?php foreach ($block->getBlogs() as $blog): ?>
+        <li>
+            <h3>
+                <a href="<?php echo $block->makeUrl($blog->getId()); ?>"><?php echo $blog->getTitle(); ?></a>
+            </h3>
+            <div class="blog-post-item-content">
+                <?php echo $blog->getContent(); ?>
+            </div>
+            <div class="blog-post-item-meta">
+                <strong><?php echo __('Create at:'); ?></strong><?php echo $blog->getCreationTime(); ?>
+            </div>
+        </li>
+    <?php endforeach; ?>
+</ul>
