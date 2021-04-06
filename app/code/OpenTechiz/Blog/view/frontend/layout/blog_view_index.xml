@@ -5,7 +5,6 @@
         <title>Blog details page</title>
     </head>
     <body>
-        <referenceBlock name="wishlist_sidebar" remove="true"/>
         <referenceContainer name="content">
             <block class="OpenTechiz\Blog\Block\Blogdetail" name="blogdetail" template="OpenTechiz_Blog::blogdetail.phtml" />
         </referenceContainer>

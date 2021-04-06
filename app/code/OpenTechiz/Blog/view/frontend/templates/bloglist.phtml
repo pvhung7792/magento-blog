@@ -2,10 +2,12 @@
 
 <ul class="blog-post-list">
     <?php foreach ($block->getBlogs() as $blog): ?>
-        <li>
-            <h3>
-                <a href="<?php echo $block->makeUrl($blog->getId()); ?>"><?php echo $blog->getTitle(); ?></a>
-            </h3>
+        <li class="blog-post-list-item">
+            <div class="blog-post-item-title">
+                <strong>
+                    <a href="<?php echo $block->makeUrl($blog->getId()); ?>"><?php echo $blog->getTitle(); ?></a>
+                </strong>
+            </div>
             <div class="blog-post-item-content">
                 <?php echo $blog->getContent(); ?>
             </div>

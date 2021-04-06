@@ -1,12 +1,14 @@
 <h2>Blog Detail</h2>
 
-<?php $blog = $block->getBlogData() ;?>
+<?php
+$blog = $block->getBlogData()[0];
+?>
 
 <h3>
-    <?php echo $blog->getTitle();?>
+    <?php echo $blog['title'];?>
 </h3>
-<p><?php echo __('Content: ').$blog->getContent();?></p>
-<p><?php echo __('Created at: ').$blog->getCreationTime();?></p>
-<p><?php echo __('Updated at: ').$blog->getUpdateTime();?></p>
+<p><?php echo __('Content: ').$blog['content'];?></p>
+<p><?php echo __('Created at: ').$blog['creation_time'];?></p>
+<p><?php echo __('Updated at: ').$blog['update_time'];?></p>
 
 

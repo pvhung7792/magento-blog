@@ -61,13 +61,6 @@ interface PostInterface extends ExtensibleDataInterface
     public function setId($id);
 
     /**
-     * @param integer $modelId
-     * @param null|string $field
-     * @return $this
-     */
-    public function load($modelId, $field = null);
-
-    /**
      * @param string $url_key
      * @return $this
      */

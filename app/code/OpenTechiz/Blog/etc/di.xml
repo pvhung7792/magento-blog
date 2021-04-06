@@ -3,4 +3,18 @@
     <preference for="OpenTechiz\Post\Api\PostRepositoryInterface" type="OpenTechiz\Post\Model\PostRepository"/>
     <preference for="OpenTechiz\Post\Api\Data\PostInterface" type="OpenTechiz\Post\Model\Post"/>
     <preference for="OpenTechiz\Post\Api\Data\PostSearchResultInterface" type="OpenTechiz\Post\Model\PostSearchResult"/>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="blog_post_listing_data_source" xsi:type="string">blog_post_collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="blog_post_collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">opentechiz_blog_post</argument>
+            <argument name="resourceModel" xsi:type="string">OpenTechiz\Blog\Model\ResourceModel\Post</argument>
+        </arguments>
+    </virtualType>
 </config>

@@ -18,17 +18,18 @@ class Blogdetail extends \Magento\Framework\View\Element\Template
 
     public function getBlogData()
     {
-        $id = $this->getRequest()->getParam('id');
-        $data = '';
+//        $id = $this->getRequest()->getParam('id');
+        $id = $this->_request->getParam('id');
+//        $data = '';
 
-        $collection = $this->_postCollectionFactory->create();
-//        $data = $collection->load($id);
+        $collection = $this->_postCollectionFactory->create()->addFieldToFilter('post_id', $id)->getData();
+        /*$data = $collection->load($id);
         foreach ($collection as $blog){
             if ($blog->getId() == $id){
                 $data = $blog;
             }
         }
-        return $data;
+        $data = $collection->getItemByColumnValue('post_id',$id);*/
+        return $collection;
     }
-
 }

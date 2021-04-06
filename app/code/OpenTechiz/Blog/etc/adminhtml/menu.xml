@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add
+             id="OpenTechiz_Blog::blog"
+             title="Blog"
+             module="OpenTechiz_Blog"
+             sortOrder="41"
+             resource="OpenTechiz_Blog::menu"/>
+     <!--   <add
+             id="OpenTechiz_Blog::parent"
+             title="ViMagento Post"
+             module="OpenTechiz_Blog"
+             sortOrder="10"
+             resource="OpenTechiz_Blog::menu"
+             parent="OpenTechiz_Blog::vimagento"/>-->
+        <add
+             id="OpenTechiz_Blog::post"
+             title="Manage Posts"
+             module="OpenTechiz_Blog"
+             sortOrder="10"
+             action="blog/posts/index"
+             resource="OpenTechiz_Blog::post"
+             parent="OpenTechiz_Blog::blog"/>
+        <!--<add
+             id="OpenTechiz_Blog::configuration"
+             title="Configuration"
+             module="OpenTechiz_Blog"
+             sortOrder="20"
+             parent="OpenTechiz_Blog::parent"
+             action="adminhtml/system_config"
+             resource="OpenTechiz_Blog::parent"/>-->
+    </menu>
+</config>

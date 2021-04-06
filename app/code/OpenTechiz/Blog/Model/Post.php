@@ -88,13 +88,6 @@ class Post extends \Magento\Framework\Model\AbstractModel implements PostInterfa
         $this->setData(self::POST_ID, $id);
         return $this;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public function getById($id)
-    {
-        return getData($key = '',$id);
-    }
 
     /**
      * {@inheritdoc}
