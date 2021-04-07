@@ -1,10 +1,10 @@
 <?php
-namespace OpenTechiz\Blog\Controller\Adminhtml\Posts;
+namespace OpenTechiz\Blog\Controller\Adminhtml\Index;
 
 use Magento\Framework\View\Result\PageFactory;
 use Magento\Backend\App\Action;
 
-class Index extends \Magento\Backend\App\Action
+class Add extends \Magento\Backend\App\Action
 {
     protected $_pageFactory;
 
@@ -17,7 +17,7 @@ class Index extends \Magento\Backend\App\Action
     public function execute()
     {
         $resultPage = $this->_pageFactory->create();
-        $resultPage->getConfig()->getTitle()->prepend(__('OpenTechiz blog list'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Add new Blog'));
         return $resultPage;
     }
 

@@ -2,34 +2,31 @@
 namespace OpenTechiz\Blog\Block;
 
 use Magento\Framework\View\Element\Template;
+use OpenTechiz\Blog\Api\PostRepositoryInterface;
 
 class Blogdetail extends \Magento\Framework\View\Element\Template
 {
-    private $_postCollectionFactory;
+    private $_postRepository;
 
     public function __construct(
         Template\Context $context,
-        \OpenTechiz\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
+        PostRepositoryInterface $postRepository,
         array $data = [])
     {
-        $this->_postCollectionFactory = $postCollectionFactory;
+        $this->_postRepository = $postRepository;
         parent::__construct($context, $data);
     }
 
     public function getBlogData()
     {
-//        $id = $this->getRequest()->getParam('id');
-        $id = $this->_request->getParam('id');
-//        $data = '';
-
-        $collection = $this->_postCollectionFactory->create()->addFieldToFilter('post_id', $id)->getData();
-        /*$data = $collection->load($id);
-        foreach ($collection as $blog){
-            if ($blog->getId() == $id){
-                $data = $blog;
-            }
+        $id = $this->getRequest()->getParam('id');
+        try {
+            $blog = $this->_postRepository->getById($id);
+        }catch (NoSuchEntityException $e){
+            echo 'alsdj';
+            exit();
         }
-        $data = $collection->getItemByColumnValue('post_id',$id);*/
-        return $collection;
+
+        return $blog;
     }
 }

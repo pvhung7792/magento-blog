@@ -5,6 +5,7 @@ use OpenTechiz\Blog\Api\Data\PostInterface;
 use OpenTechiz\Blog\Model\ResourceModel\Post\Collection;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Api\SortOrder;
+use Magento\Framework\Exception\NoSuchEntityException;
 
 /**
  * Class CustomManagement
@@ -37,13 +38,13 @@ class PostRepository implements \OpenTechiz\Blog\Api\PostRepositoryInterface
      * @param \OpenTechiz\Blog\Model\PostFactory $postFactory
      * @param \OpenTechiz\Blog\Model\ResourceModel\Post $customResource
      * @param \OpenTechiz\Blog\Model\ResourceModel\Post\CollectionFactory $collectionFactory
-     * @param \OpenTechiz\Blog\Api\Data\PostSearchResultInterface $postResultInterfaceFactory
+     * @param \OpenTechiz\Blog\Api\Data\PostSearchResultInterfaceFactory $postResultInterfaceFactory
      */
     public function __construct(
         \OpenTechiz\Blog\Model\PostFactory $postFactory,
         \OpenTechiz\Blog\Model\ResourceModel\Post $postResource,
         \OpenTechiz\Blog\Model\ResourceModel\Post\CollectionFactory $collectionFactory,
-        \OpenTechiz\Blog\Api\Data\PostSearchResultInterface $postResultInterfaceFactory
+        \OpenTechiz\Blog\Api\Data\PostSearchResultInterfaceFactory $postResultInterfaceFactory
     ) {
         $this->postFactory = $postFactory;
         $this->postResource = $postResource;
@@ -58,7 +59,7 @@ class PostRepository implements \OpenTechiz\Blog\Api\PostRepositoryInterface
     {
         $postModel = $this->postFactory->create();
         $this->postResource->load($postModel, $id);
-        if (!$postModel->getEntityId()) {
+        if (!$postModel->getId()) {
             throw new NoSuchEntityException(__('Unable to find post data with ID "%1"', $id));
         }
         return $postModel;
@@ -152,7 +153,7 @@ class PostRepository implements \OpenTechiz\Blog\Api\PostRepositoryInterface
      */
     private function buildSearchResult(SearchCriteriaInterface $searchCriteria, Collection $collection)
     {
-        $searchResults = $this->searchResultInterfaceFactory->create();
+        $searchResults = $this->postResultInterfaceFactory->create();
 
         $searchResults->setSearchCriteria($searchCriteria);
         $searchResults->setItems($collection->getItems());

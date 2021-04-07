@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>OpenTechiz Blogs Listing</title>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="OpenTechiz\Blog\Block\Adminhtml\Bloglist" name="adminhtml.block.blog.bloglist.container">
+                <block class="OpenTechiz\Blog\Block\Adminhtml\Bloglist\Grid" name="adminhtml.block.blog.bloglist.grid" as="grid" />
+                <uiComponent name="blog_index_listing" />
+            </block>
+        </referenceContainer>
+    </body>
+</page>
+
+
+    <!--<referenceContainer name="content">
+             <uiComponent name="blog_index_listing" />
+         </referenceContainer>-->

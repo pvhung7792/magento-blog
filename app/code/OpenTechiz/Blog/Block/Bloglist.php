@@ -1,24 +1,47 @@
 <?php
 namespace OpenTechiz\Blog\Block;
 
+use Magento\Framework\Api\FilterBuilder;
+use Magento\Framework\Api\Search\FilterGroupBuilder;
+use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\View\Element\Template;
-use OpenTechiz\Blog\Api\Data\PostInterface;
-use OpenTechiz\Blog\Model\ResourceModel\Post\Collection as PostCollection;
-
+use OpenTechiz\Blog\Api\PostRepositoryInterface;
 
 class Bloglist extends \Magento\Framework\View\Element\Template
 {
-    private $_postCollectionFactory;
+    /**
+     * @var PostRepositoryInterface
+     */
+    protected $postRepository;
+
+    /**
+     * @var SearchCriteriaBuilder
+     */
+    protected $searchCriteriaBuilder;
+
+    /**
+     * @var FilterGroupBuilder
+     */
+    protected $filterGroupBuilder;
+
+    /**
+     * @var FilterBuilder
+     */
+    protected $filterBuilder;
 
     public function __construct(
         Template\Context $context,
-        \OpenTechiz\Blog\Model\ResourceModel\Post\CollectionFactory $postCollectionFactory,
-        array $data = [])
-    {
-        $this->_postCollectionFactory = $postCollectionFactory;
-        parent::__construct($context, $data);
+        PostRepositoryInterface $postRepository,
+        SearchCriteriaBuilder $searchCriteriaBuilder,
+        FilterGroupBuilder $filterGroupBuilder,
+        FilterBuilder $filterBuilder
+    ) {
+        parent::__construct($context);
+        $this->postRepository = $postRepository;
+        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->filterGroupBuilder = $filterGroupBuilder;
+        $this->filterBuilder = $filterBuilder;
     }
-
     /*public function getBlogData()
     {
         $collection = $this->_postCollectionFactory->create();
@@ -26,17 +49,18 @@ class Bloglist extends \Magento\Framework\View\Element\Template
     }*/
     public function getBlogs()
     {
-        if (!$this->hasData('posts')) {
-            $post = $this->_postCollectionFactory
-                        ->create()
-                        ->addFilter('is_active', 1)
-                        ->addOrder(
-                            PostInterface::CREATION_TIME,
-                            PostCollection::SORT_ORDER_DESC
-                        );
-            $this->setData('posts',$post);
-        }
-        return $this->getData('posts');
+        $filter = $this->filterBuilder->setField('is_active')
+            ->setValue(1)
+            ->setConditionType('eq')
+            ->create();
+
+        $filterOr = $this->filterGroupBuilder->addFilter($filter)->create();
+
+        $this->searchCriteriaBuilder->setFilterGroups([$filterOr]);
+
+        $bloglist = $this->postRepository->getList($this->searchCriteriaBuilder->create())->getItems();
+
+        return $bloglist;
     }
 
     public function makeUrl($param)

@@ -2,14 +2,14 @@
 
 namespace OpenTechiz\Blog\Model;
 
-//use Magento\Framework\Model\AbstractExtensibleModel;
+use Magento\Framework\Model\AbstractExtensibleModel;
 use OpenTechiz\Blog\Api\Data\PostInterface;
 
 /**
  * Class Post
  * @package OpenTechiz\Blog\Model
  */
-class Post extends \Magento\Framework\Model\AbstractModel implements PostInterface
+class Post extends AbstractExtensibleModel implements PostInterface
 {
     /*const POST_ID = 'post_id';
     const URL_KEY = 'url_key';
