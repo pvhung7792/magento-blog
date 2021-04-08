@@ -9,7 +9,7 @@
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
     <table name="opentechiz_blog_post" resource="default" engine="innodb" comment="OpenTechiz Blog Post">
-        <column xsi:type="int" name="post_id" padding="10" unsigned="true" nullable="false" comment="Entity Id"/>
+        <column xsi:type="int" name="post_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
         <column xsi:type="varchar" name="url_key" nullable="true" default="null" length="100" comment="Url key"/>
         <column xsi:type="varchar" name="title" nullable="false" length="255" comment="Blog title"/>
         <column xsi:type="text" name="content" nullable="false" comment="Blog content"/>
