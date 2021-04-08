@@ -98,11 +98,13 @@ class Post extends AbstractExtensibleModel implements PostInterface
         return $this;
     }
 
-
-   /* public function getUrl()
+    /**
+     * {@inheritdoc}
+     */
+    public function getUrl()
     {
-        return $this->getData(self::TITLE);
-    }*/
+        return "/blog/".$this->_getData(self::URL_KEY);
+    }
 
     /**
      * {@inheritdoc}
@@ -149,4 +151,11 @@ class Post extends AbstractExtensibleModel implements PostInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function checkUrlKey($url_key)
+    {
+        return $this->_getResource()->checkUrlKey($url_key);
+    }
 }

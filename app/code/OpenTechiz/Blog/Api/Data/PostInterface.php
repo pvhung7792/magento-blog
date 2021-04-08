@@ -66,8 +66,6 @@ interface PostInterface extends ExtensibleDataInterface
      */
     public function setUrlKey($url_key);
 
-//    public function getUrl();
-
     /**
      * @param string $title
      * @return $this
@@ -97,4 +95,10 @@ interface PostInterface extends ExtensibleDataInterface
      * @return $this
      */
     public function setIsActive($isActive);
+
+    /**
+     * @param string $url_key
+     * @return int
+     */
+    public function checkUrlKey($url_key);
 }

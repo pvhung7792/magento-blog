@@ -7,7 +7,8 @@ class Index extends \Magento\Framework\App\Action\Action
 
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
-        \Magento\Framework\View\Result\PageFactory $pageFactory)
+        \Magento\Framework\View\Result\PageFactory $pageFactory
+    )
     {
         $this->_pageFactory = $pageFactory;
         return parent::__construct($context);
@@ -15,7 +16,6 @@ class Index extends \Magento\Framework\App\Action\Action
 
     public function execute()
     {
-        $pageResult = $this->_pageFactory->create();
-        return $pageResult;
+        return $this->_pageFactory->create();
     }
 }

@@ -19,13 +19,8 @@ class Blogdetail extends \Magento\Framework\View\Element\Template
 
     public function getBlogData()
     {
-        $id = $this->getRequest()->getParam('id');
-        try {
-            $blog = $this->_postRepository->getById($id);
-        }catch (NoSuchEntityException $e){
-            echo 'alsdj';
-            exit();
-        }
+        $post_id = $this->getRequest()->getParam('post_id');
+        $blog = $this->_postRepository->getById($post_id);
 
         return $blog;
     }

@@ -63,8 +63,4 @@ class Bloglist extends \Magento\Framework\View\Element\Template
         return $bloglist;
     }
 
-    public function makeUrl($param)
-    {
-        return $this->getUrl('blog/view', ['id'=>$param]);
-    }
 }
