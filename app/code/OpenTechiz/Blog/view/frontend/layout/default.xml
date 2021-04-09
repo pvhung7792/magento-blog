@@ -15,5 +15,18 @@
         <referenceBlock name="upsell.product.addto.compare" remove="true" />
         <referenceBlock name="view.addto.compare" remove="true" />
 
+        <referenceBlock name="footer_links">
+            <block class="Magento\Framework\View\Element\Html\Link\Current" name="blog_link">
+                <arguments>
+                    <argument name="lable" translate="true" xsi:type="string">
+                        Blog list
+                    </argument>
+                    <argument name="path" xsi:type="string">
+                        blog
+                    </argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+
     </body>
 </page>

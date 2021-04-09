@@ -11,7 +11,7 @@
                 <item name="name" xsi:type="string">add</item>
                 <item name="label" xsi:type="string" translate="true">Add new Blog</item>
                 <item name="class" xsi:type="string">primary</item>
-                <item name="url" xsi:type="string">*/*/add</item>
+                <item name="url" xsi:type="string">blog/index/add</item>
             </item>
         </item>
     </argument>
@@ -50,7 +50,7 @@
                     <item name="config" xsi:type="array">
                         <item name="type" xsi:type="string">delete</item>
                         <item name="label" xsi:type="string" translate="true">Delete</item>
-                        <item name="url" xsi:type="url" path="*/*/delete"/>
+                        <item name="url" xsi:type="url" path="blog/action/delete"/>
                         <item name="confirm" xsi:type="array">
                             <item name="title" xsi:type="string" translate="true">Delete Row</item>
                             <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
@@ -63,7 +63,7 @@
                     <item name="config" xsi:type="array">
                         <item name="type" xsi:type="string">enable</item>
                         <item name="label" xsi:type="string" translate="true">Enable</item>
-                        <item name="url" xsi:type="url" path="*/*/enable"/>
+                        <item name="url" xsi:type="url" path="blog/action/enable"/>
                     </item>
                 </argument>
             </action>
@@ -72,7 +72,7 @@
                     <item name="config" xsi:type="array">
                         <item name="type" xsi:type="string">disable</item>
                         <item name="label" xsi:type="string" translate="true">Disable</item>
-                        <item name="url" xsi:type="url" path="*/*/disable"/>
+                        <item name="url" xsi:type="url" path="blog/action/disable"/>
                     </item>
                 </argument>
             </action>
@@ -132,6 +132,7 @@
                 </item>
             </argument>
         </column>
+
         <!--Column title-->
         <column name="title">
             <argument name="data" xsi:type="array">
@@ -142,6 +143,21 @@
                     <item name="source" xsi:type="string">blog_index</item>
                     <item name="dataScope" xsi:type="string">title</item>
                     <item name="label" xsi:type="string" translate="true">Title</item>
+                    <item name="filter" xsi:type="string">text</item>
+                </item>
+            </argument>
+        </column>
+
+        <!--Column url_key-->
+        <column name="url_key">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="visible" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">text</item>
+                    <item name="formElement" xsi:type="string">input</item>
+                    <item name="source" xsi:type="string">blog_index</item>
+                    <item name="dataScope" xsi:type="string">url_key</item>
+                    <item name="label" xsi:type="string" translate="true">Url Key</item>
                     <item name="filter" xsi:type="string">text</item>
                 </item>
             </argument>
@@ -210,12 +226,13 @@
         </column>
 
         <!--Column edit button-->
-        <actionsColumn name="preview">
+        <actionsColumn name="actions" class="OpenTechiz\Blog\Ui\Component\Listing\Column\Action">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="sortOrder" xsi:type="number">29</item>
-                    <item name="indexField" xsi:type="string">{{increment_id}}</item>
-                    <item name="label" xsi:type="string" translate="true">Action</item>
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">107</item>
+                    <item name="indexField" xsi:type="string">post_id</item>
+                    <item name="urlEntityParamName" xsi:type="string">post_id</item>
                 </item>
             </argument>
         </actionsColumn>

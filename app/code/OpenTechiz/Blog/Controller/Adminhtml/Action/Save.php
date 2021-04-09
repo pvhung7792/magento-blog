@@ -1,5 +1,5 @@
 <?php
-namespace OpenTechiz\Blog\Controller\Adminhtml\Index;
+namespace OpenTechiz\Blog\Controller\Adminhtml\Action;
 
 use Magento\Backend\App\Action;
 use OpenTechiz\Blog\Api\PostRepositoryInterface;
@@ -36,23 +36,30 @@ class Save extends Action
         $post->setContent($data['content']);
         $post->setTitle($data['title']);
         $post->setUrlKey($data['url_key']);
-        $post->setIsActive($data['status']);
+        $post->setIsActive($data['is_active']);
         $post->setCreationTime($this->_dateTime->gmtDate());
         $post->setUpdateTime($this->_dateTime->gmtDate());
 
+        $message = '';
         if ($id) {
             $post->setId($id);
-            $this->getMessageManager()->addSuccessMessage(__('Edit success'));
+            $message = 'Update success';
         } else {
-            $this->getMessageManager()->addSuccessMessage(__('Save success'));
+            $message = 'Save success';
         }
 
         try{
             $this->_postRepository->save($post);
-            $this->_redirect('blog/index/add');
         }catch (\Exception $e){
-            $this->getMessageManager()->addErrorMessage(__('Save thất bại.'));
+            $this->messageManager->addErrorMessage(__('Save fail'));
         }
+
+        $this->messageManager->addSuccessMessage(
+            __('%1 sdkfhkdsf',$message)
+        );
+
+        $this->_redirect('blog/index/index');
+
     }
 
     protected function _isAllowed()
