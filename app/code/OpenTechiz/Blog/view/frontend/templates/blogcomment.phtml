@@ -1,0 +1,42 @@
+<div class="blog-comment-container">
+    <div class="blog-comment-form">
+        <h4>Add comment</h4>
+        <form action="../blog/comment/add" method="post" id="comment-form">
+            <input type="text" name="post_id" value="<?php echo $block->getPostId(); ?>" hidden>
+            <div class="form-input">
+                <label for="">
+                    User name
+                </label>
+                <input type="text" name="user_name" style="width: 30%">
+            </div>
+            <div class="form-input">
+                <label for="">
+                    Comment
+                </label>
+                <textarea name="content" id="" cols="20" rows="2" maxlength="100">
+
+                </textarea>
+            </div>
+            <br>
+            <div>
+                <button class="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+    <div class="blog-comment-list" style="margin-top: 10px">
+        <?php foreach($block->getComments() as $comment): ?>
+        <div class="post-comment" style="padding: 4px; background-color: lightgrey; margin: 10px 0">
+            <div class="user-name">
+                <b><?php echo __('User name: ').$comment->getUserName(); ?></b>
+            </div>
+            <div class="user-name">
+                <p><?php echo $comment->getCreationTime(); ?></p>
+            </div>
+            <div class="comment-content" style="padding-left: 20px">
+                <p><?php echo $comment->getContent(); ?></p>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+

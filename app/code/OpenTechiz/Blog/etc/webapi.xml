@@ -30,4 +30,35 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
+
+    <route method="GET" url="/Blog/Comment/:id">
+        <service class="OpenTechiz\Blog\Api\CommentRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="GET" url="/Blog/Comment/">
+        <service class="OpenTechiz\Blog\Api\CommentRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="POST" url="/Blog/Comment/">
+        <service class="OpenTechiz\Blog\Api\CommentRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="PUT" url="/Blog/Comment/">
+        <service class="OpenTechiz\Blog\Api\PostRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
+    <route method="DELETE" url="/Blog/Comment/:id">
+        <service class="OpenTechiz\Blog\Api\CommentRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="anonymous"/>
+        </resources>
+    </route>
 </routes>

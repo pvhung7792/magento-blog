@@ -22,21 +22,32 @@ class Router implements RouterInterface
 
     public function match(RequestInterface $request)
     {
-        $url_key = str_replace('/blog/','',$request->getPathInfo());
-        $url_key = rtrim($url_key,'/');
 
-        $post= $this->_postFactory->create();
-        $post_id= $post->checkUrlKey($url_key);
-        // $this->logger->debug( var_dump($post_id));
+        $url = str_replace('/blog/','',$request->getPathInfo());
+        $url = trim($url, '/');
+        $url = explode('/',$url);
 
-        if  (!$post_id)
-        {
-            return null;
+        $controller = $url[0];
+
+        if ($controller == 'view'){
+            $url_key = $url[1];
+            $post= $this->_postFactory->create();
+            $post_id= $post->checkUrlKey($url_key);
+            if  (!$post_id)
+            {
+                return null;
+            }
+
+            $request->setModuleName('blog')->setControllerName('view')->setActionName('Index')->setParam('post_id',$post_id);
+            $request->setAlias(\Magento\Framework\Url::REWRITE_REQUEST_PATH_ALIAS,$url_key);
+        }else{
+
+            $action = $url[1];
+            $paramName = isset($url[2])? $url[2] : '';
+            $param = isset($url[3])? $url[3] : '';
+
+            $request->setModuleName('blog')->setControllerName($controller)->setActionName($action);
         }
-
-        $request->setModuleName('blog')->setControllerName('view')->setActionName('Index')->setParam('post_id',$post_id);
-
-        $request->setAlias(\Magento\Framework\Url::REWRITE_REQUEST_PATH_ALIAS,$url_key);
 
         return $this->actionFactory->create('Magento\Framework\App\Action\Forward');
     }

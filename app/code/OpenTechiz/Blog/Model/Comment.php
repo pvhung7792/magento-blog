@@ -3,25 +3,18 @@
 namespace OpenTechiz\Blog\Model;
 
 use Magento\Framework\Model\AbstractExtensibleModel;
-use OpenTechiz\Blog\Api\Data\PostInterface;
+use OpenTechiz\Blog\Api\Data\CommentInterface;
 
 /**
  * Class Post
  * @package OpenTechiz\Blog\Model
  */
-class Post extends AbstractExtensibleModel implements PostInterface
+class Comment extends AbstractExtensibleModel implements CommentInterface
 {
-    /*const POST_ID = 'post_id';
-    const URL_KEY = 'url_key';
-    const TITLE = 'title';
-    const CONTENT = 'content';
-    const CREATION_TIME = 'creation_time';
-    const UPDATE_TIME = 'update_time';
-    const IS_ACTIVE = 'is_active';*/
 
     protected function _construct()
     {
-        $this->_init(\OpenTechiz\Blog\Model\ResourceModel\Post::class);
+        $this->_init(\OpenTechiz\Blog\Model\ResourceModel\Comment::class);
     }
 
     /**
@@ -29,23 +22,23 @@ class Post extends AbstractExtensibleModel implements PostInterface
      */
     public function getId()
     {
+        return $this->getData(self::COMMENT_ID);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUserName()
+    {
+        return $this->getData(self::USER_NAME);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPostId()
+    {
         return $this->getData(self::POST_ID);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUrlKey()
-    {
-        return $this->getData(self::URL_KEY);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTitle()
-    {
-        return $this->getData(self::TITLE);
     }
 
     /**
@@ -67,14 +60,6 @@ class Post extends AbstractExtensibleModel implements PostInterface
     /**
      * {@inheritdoc}
      */
-    public function getUpdateTime()
-    {
-        return $this->getData(self::UPDATE_TIME);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function isActive()
     {
         return $this->getData(self::IS_ACTIVE);
@@ -85,33 +70,25 @@ class Post extends AbstractExtensibleModel implements PostInterface
      */
     public function setId($id)
     {
-        $this->setData(self::POST_ID, $id);
+        $this->setData(self::COMMENT_ID, $id);
         return $this;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setUrlKey($url_key)
+    public function setUserName($user_name)
     {
-        $this->setData(self::URL_KEY, $url_key);
+        $this->setData(self::USER_NAME, $user_name);
         return $this;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getUrl()
+    public function setPostId($post_id)
     {
-        return "/view/".$this->_getData(self::URL_KEY);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTitle($title)
-    {
-        $this->setData(self::TITLE, $title);
+        $this->setData(self::POST_ID, $post_id);
         return $this;
     }
 
@@ -136,26 +113,10 @@ class Post extends AbstractExtensibleModel implements PostInterface
     /**
      * {@inheritdoc}
      */
-    public function setUpdateTime($updateTime)
-    {
-        $this->setData(self::UPDATE_TIME, $updateTime);
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function setIsActive($isActive)
     {
         $this->setData(self::IS_ACTIVE, $isActive);
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function checkUrlKey($url_key)
-    {
-        return $this->_getResource()->checkUrlKey($url_key);
-    }
 }

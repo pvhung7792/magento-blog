@@ -15,5 +15,19 @@
         "constraint": {
             "PRIMARY": true
         }
+    },
+    "opentechiz_blog_comment": {
+        "column": {
+            "comment_id": true,
+            "post_id": true,
+            "user_name": true,
+            "content": true,
+            "is_active": true,
+            "creation_time": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "OPENTECHIZ_BLOG_COMMENT_POST_ID_OPENTECHIZ_BLOG_POST_POST_ID": true
+        }
     }
 }

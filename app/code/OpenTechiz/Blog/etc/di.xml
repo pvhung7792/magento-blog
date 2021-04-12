@@ -4,6 +4,10 @@
     <preference for="OpenTechiz\Blog\Api\Data\PostInterface" type="OpenTechiz\Blog\Model\Post"/>
     <preference for="OpenTechiz\Blog\Api\Data\PostSearchResultInterface" type="OpenTechiz\Blog\Model\PostSearchResult"/>
 
+    <preference for="OpenTechiz\Blog\Api\CommentRepositoryInterface" type="OpenTechiz\Blog\Model\CommentRepository"/>
+    <preference for="OpenTechiz\Blog\Api\Data\CommentInterface" type="OpenTechiz\Blog\Model\Comment"/>
+    <preference for="OpenTechiz\Blog\Api\Data\CommentSearchResultInterface" type="OpenTechiz\Blog\Model\CommentSearchResult"/>
+
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">

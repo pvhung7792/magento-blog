@@ -31,9 +31,9 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         foreach ($items as $item) {
             $this->_loadedData[$item->getId()] = $item->getData();
         }
-        echo "<pre>";
+        /*echo "<pre>";
         print_r($this->_loadedData);
-        exit();
+        exit();*/
         return $this->_loadedData;
     }
 }
