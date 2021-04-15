@@ -6,8 +6,17 @@ use OpenTechiz\Blog\Api\PostRepositoryInterface;
 
 class Blogdetail extends \Magento\Framework\View\Element\Template
 {
+    /**
+     * @var PostRepositoryInterface
+     */
     private $_postRepository;
 
+    /**
+     * Blogdetail constructor.
+     * @param Template\Context $context
+     * @param PostRepositoryInterface $postRepository
+     * @param array $data
+     */
     public function __construct(
         Template\Context $context,
         PostRepositoryInterface $postRepository,
@@ -17,6 +26,9 @@ class Blogdetail extends \Magento\Framework\View\Element\Template
         parent::__construct($context, $data);
     }
 
+    /**
+     * @return \OpenTechiz\Blog\Api\Data\PostInterface
+     */
     public function getBlogData()
     {
         $post_id = $this->getRequest()->getParam('post_id');

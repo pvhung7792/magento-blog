@@ -11,14 +11,26 @@
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="blog_index_listing_data_source" xsi:type="string">blog_post_collection</item>
+                <item name="blog_post_listing_data_source" xsi:type="string">blog_post_collection</item>
             </argument>
+            <argument name="collections" xsi:type="array">
+                <item name="blog_comment_listing_data_source" xsi:type="string">blog_comment_collection</item>
+            </argument>
+            <!--<argument name="collections" xsi:type="array">
+                <item name="blog_comment_listing_data_source" xsi:type="string">OpenTechiz\Blog\Model\ResourceModel\Comment\Collection</item>
+            </argument>-->
         </arguments>
     </type>
     <virtualType name="blog_post_collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">opentechiz_blog_post</argument>
             <argument name="resourceModel" xsi:type="string">OpenTechiz\Blog\Model\ResourceModel\Post</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="blog_comment_collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">opentechiz_blog_comment</argument>
+            <argument name="resourceModel" xsi:type="string">OpenTechiz\Blog\Model\ResourceModel\Comment</argument>
         </arguments>
     </virtualType>
 </config>

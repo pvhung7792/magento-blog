@@ -46,7 +46,7 @@ class Action extends \Magento\Ui\Component\Listing\Columns\Column
             foreach ($dataSource['data']['items'] as & $item) {
                 $item[$this->getData('name')] = [
                     'edit' => [
-                        'href'=> $this->_urlBuilder->getUrl('blog/index/edit', ['id' => $item['post_id']]),
+                        'href'=> $this->_urlBuilder->getUrl('blog/post/edit', ['id' => $item['post_id']]),
                         'label' => __('Edit')
                     ],
                 ];

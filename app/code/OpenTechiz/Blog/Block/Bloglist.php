@@ -6,7 +6,6 @@ use Magento\Framework\Api\Search\FilterGroupBuilder;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\View\Element\Template;
 use OpenTechiz\Blog\Api\PostRepositoryInterface;
-
 class Bloglist extends \Magento\Framework\View\Element\Template
 {
     /**

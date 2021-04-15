@@ -32,12 +32,12 @@ class Enable extends Action
         $postEnable = 0;
         foreach ($collection as $post){
 //            $post->setId($post_id);
-            if ($post->isActive() == 1){
-                break;
+            if ($post->isActive() != 1){
+                $postEnable++;
             }
             $post->setIsActive(1);
             $this->_postRepository->save($post);
-            $postEnable++;
+
         }
 
         if ($postEnable) {
@@ -46,7 +46,7 @@ class Enable extends Action
             );
         }
 
-        $this->_redirect('blog/index/index');
+        $this->_redirect('blog/post/index');
     }
 
     protected function _isAllowed()

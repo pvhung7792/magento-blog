@@ -23,11 +23,13 @@
             "user_name": true,
             "content": true,
             "is_active": true,
-            "creation_time": true
+            "creation_time": true,
+            "user_id": true
         },
         "constraint": {
             "PRIMARY": true,
-            "OPENTECHIZ_BLOG_COMMENT_POST_ID_OPENTECHIZ_BLOG_POST_POST_ID": true
+            "OPENTECHIZ_BLOG_COMMENT_POST_ID_OPENTECHIZ_BLOG_POST_POST_ID": true,
+            "OPENTECHIZ_BLOG_COMMENT_USER_ID_CUSTOMER_ENTITY_ENTITY_ID": true
         }
     }
 }

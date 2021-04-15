@@ -4,13 +4,14 @@ namespace OpenTechiz\Blog\Model;
 
 use Magento\Framework\Model\AbstractExtensibleModel;
 use OpenTechiz\Blog\Api\Data\CommentInterface;
-
+use Magento\Framework\DataObject\IdentityInterface;
 /**
  * Class Post
  * @package OpenTechiz\Blog\Model
  */
 class Comment extends AbstractExtensibleModel implements CommentInterface
 {
+    const CACHE_TAG = 'opentechiz_blog_comment';
 
     protected function _construct()
     {
@@ -28,9 +29,9 @@ class Comment extends AbstractExtensibleModel implements CommentInterface
     /**
      * {@inheritdoc}
      */
-    public function getUserName()
+    public function getUserId()
     {
-        return $this->getData(self::USER_NAME);
+        return $this->getData(self::USER_ID);
     }
 
     /**
@@ -77,9 +78,9 @@ class Comment extends AbstractExtensibleModel implements CommentInterface
     /**
      * {@inheritdoc}
      */
-    public function setUserName($user_name)
+    public function setUserId($user_id)
     {
-        $this->setData(self::USER_NAME, $user_name);
+        $this->setData(self::USER_ID, $user_id);
         return $this;
     }
 

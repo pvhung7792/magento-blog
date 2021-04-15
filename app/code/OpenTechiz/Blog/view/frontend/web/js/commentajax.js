@@ -3,32 +3,29 @@ define([
     "jquery/ui"
 ], function ($){
     "use strict";
-
     function main(config, element){
         var $element = $(element);
         var AjaxCommentPostUrl = config.AjaxCommentPostUrl;
 
         var dataFrom = $('#comment-form');
-        dataFrom.mage('validation', {});
 
-        $(document).on('click','.submit',function (){
-            if(dataFrom.valid()){
-                event.preventDefault();
-                var param = dataFrom.serialize();
+        $(document).on('click','#submit',function (event){
+            event.preventDefault();
+            var param = dataFrom.serialize();
 
-                $.ajax({
-                    showLoader: true,
-                    url: AjaxCommentPostUrl,
-                    data: parm,
-                    type: "POST"
-                }).done(function (data){
-                    $('note').html(data);
-                    $('note').css('color','red');
-                    document.getElementById("comment-form").reset();
-                    return true;
-                });
-            }
+            $.ajax({
+                showLoader: true,
+                url: AjaxCommentPostUrl,
+                data: param,
+                type: "POST"
+            }).done(function (data){
+                alert(data);
+                $('#note').html(data);
+                $('#note').css('color','red');
+                document.getElementById("comment-form").reset();
+                return true;
+            });
         });
-    };
+    }
     return main;
 })

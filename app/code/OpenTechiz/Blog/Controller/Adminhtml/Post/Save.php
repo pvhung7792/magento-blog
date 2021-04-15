@@ -58,7 +58,7 @@ class Save extends Action
             __('%1 sdkfhkdsf',$message)
         );
 
-        $this->_redirect('blog/index/index');
+        $this->_redirect('blog/post/index');
 
     }
 

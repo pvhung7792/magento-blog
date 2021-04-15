@@ -22,10 +22,11 @@
             <column name="url_key"/>
         </index>
     </table>
+
     <table name="opentechiz_blog_comment" resource="default" engine="innodb" comment="OpenTechiz Blog Comment">
         <column xsi:type="int" name="comment_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Entity Id"/>
         <column xsi:type="int" name="post_id" padding="10" unsigned="true" nullable="false" comment="Post Id"/>
-        <column xsi:type="varchar" name="user_name" nullable="false" default="null" length="100" comment="User name"/>
+        <column xsi:type="int" name="user_id" padding="10" unsigned="true" nullable="false" comment="User Id"/>
         <column xsi:type="text" name="content" nullable="false" comment="Comment content"/>
         <column xsi:type="smallint" name="is_active" nullable="false" default="1" comment="Is comment active?"/>
         <column xsi:type="timestamp" name="creation_time" nullable="false" comment="Creation time"/>
@@ -35,6 +36,9 @@
         <constraint xsi:type="foreign" referenceId="BLOG_POST_TB_BLOG_COMMENT_POST_ID_POST_ID"
                     table="opentechiz_blog_comment" column="post_id" referenceTable="opentechiz_blog_post"
                     referenceColumn="post_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="CUSTOMER_ENTITY_TB_BLOG_COMMENT_POST_ID_POST_ID"
+                    table="opentechiz_blog_comment" column="user_id" referenceTable="customer_entity"
+                    referenceColumn="entity_id" onDelete="CASCADE"/>
     </table>
 </schema>
 

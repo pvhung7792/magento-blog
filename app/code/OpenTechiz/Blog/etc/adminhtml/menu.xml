@@ -15,11 +15,11 @@
              resource="OpenTechiz_Blog::menu"
              parent="OpenTechiz_Blog::vimagento"/>-->
         <add
-             id="OpenTechiz_Blog::list"
+             id="OpenTechiz_Blog::postlist"
              title="Blog lists"
              module="OpenTechiz_Blog"
              sortOrder="10"
-             action="blog/index/index"
+             action="blog/post/index"
              resource="OpenTechiz_Blog::post"
              parent="OpenTechiz_Blog::blog"/>
         <add
@@ -28,7 +28,15 @@
              module="OpenTechiz_Blog"
              sortOrder="20"
              parent="OpenTechiz_Blog::blog"
-             action="blog/index/add"
+             action="blog/post/add"
              resource="OpenTechiz_Blog::post"/>
+        <add
+            id="OpenTechiz_Blog::commentlist"
+            title="Comment list"
+            module="OpenTechiz_Blog"
+            sortOrder="30"
+            parent="OpenTechiz_Blog::blog"
+            action="blog/comment/index"
+            resource="OpenTechiz_Blog::post"/>
     </menu>
 </config>

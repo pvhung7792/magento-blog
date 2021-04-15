@@ -13,7 +13,7 @@ interface CommentInterface extends ExtensibleDataInterface
 {
     const COMMENT_ID = 'comment_id';
     const POST_ID = 'post_id';
-    const USER_NAME = 'user_name';
+    const USER_ID = 'user_id';
     const CONTENT = 'content';
     const CREATION_TIME = 'creation_time';
     const IS_ACTIVE = 'is_active';
@@ -29,9 +29,9 @@ interface CommentInterface extends ExtensibleDataInterface
     public function getPostId();
 
     /**
-     * @return string
+     * @return int
      */
-    public function getUserName();
+    public function getUserId();
 
     /**
      * @return string
@@ -61,10 +61,10 @@ interface CommentInterface extends ExtensibleDataInterface
     public function setPostId($post_id);
 
     /**
-     * @param string $title
+     * @param int $user_id
      * @return $this
      */
-    public function setUserName($user_name);
+    public function setUserId($user_id);
 
     /**
      * @param string $content
@@ -83,9 +83,4 @@ interface CommentInterface extends ExtensibleDataInterface
      * @return $this
      */
     public function setIsActive($isActive);
-
-    /**
-     * @param string $url_key
-     * @return int
-     */
 }

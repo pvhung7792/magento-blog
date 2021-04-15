@@ -5,7 +5,7 @@
     </head>
     <body>
         <referenceContainer name="content">
-            <uiComponent name="blog_index_listing" />
+            <uiComponent name="blog_post_listing" />
         </referenceContainer>
     </body>
 </page>

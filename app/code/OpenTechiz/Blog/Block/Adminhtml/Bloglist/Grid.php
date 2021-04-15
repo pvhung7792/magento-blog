@@ -83,6 +83,10 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
         return $this;
     }
 
+    /**
+     * @param $value
+     * @return string
+     */
     public function decorateStatus($value) {
         $class = '';
         $text = '';

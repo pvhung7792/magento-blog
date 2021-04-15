@@ -32,12 +32,11 @@ class Disable extends Action
         $postDisable = 0;
         foreach ($collection as $post){
 //            $post->setId($post_id);
-            if ($post->isActive() == 0){
-                break;
+            if ($post->isActive() != 0){
+                $postDisable++;
             }
             $post->setIsActive(0);
             $this->_postRepository->save($post);
-            $postDisable++;
         }
 
         if ($postDisable) {
@@ -46,7 +45,7 @@ class Disable extends Action
             );
         }
 
-        $this->_redirect('blog/index/index');
+        $this->_redirect('blog/post/index');
     }
 
     protected function _isAllowed()

@@ -2,8 +2,8 @@
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">blog_index_listing.blog_index_listing_data_source</item>
-            <item name="deps" xsi:type="string">blog_index_listing.blog_index_listing_data_source</item>
+            <item name="provider" xsi:type="string">blog_post_listing.blog_post_listing_data_source</item>
+            <item name="deps" xsi:type="string">blog_post_listing.blog_post_listing_data_source</item>
         </item>
         <item name="spinner" xsi:type="string">blog_index_columns</item>
         <item name="buttons" xsi:type="array">
@@ -11,7 +11,7 @@
                 <item name="name" xsi:type="string">add</item>
                 <item name="label" xsi:type="string" translate="true">Add new Blog</item>
                 <item name="class" xsi:type="string">primary</item>
-                <item name="url" xsi:type="string">blog/index/add</item>
+                <item name="url" xsi:type="string">blog/post/add</item>
             </item>
         </item>
     </argument>
@@ -27,10 +27,10 @@
         <filterSearch name="fulltext">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="provider" xsi:type="string">blog_index_listing.blog_index_listing_data_source</item>
-                    <item name="chipsProvider" xsi:type="string">blog_index_listing.blog_index_listing.listing_top.listing_filters_chips</item>
+                    <item name="provider" xsi:type="string">blog_post_listing.blog_post_listing_data_source</item>
+                    <item name="chipsProvider" xsi:type="string">blog_post_listing.blog_post_listing.listing_top.listing_filters_chips</item>
                     <item name="storageConfig" xsi:type="array">
-                        <item name="provider" xsi:type="string">blog_index_listing.blog_index_listing.listing_top.bookmarks</item>
+                        <item name="provider" xsi:type="string">blog_post_listing.blog_post_listing.listing_top.bookmarks</item>
                         <item name="namespace" xsi:type="string">current.search</item>
                     </item>
                 </item>
@@ -50,7 +50,7 @@
                     <item name="config" xsi:type="array">
                         <item name="type" xsi:type="string">delete</item>
                         <item name="label" xsi:type="string" translate="true">Delete</item>
-                        <item name="url" xsi:type="url" path="blog/action/delete"/>
+                        <item name="url" xsi:type="url" path="blog/post/delete"/>
                         <item name="confirm" xsi:type="array">
                             <item name="title" xsi:type="string" translate="true">Delete Row</item>
                             <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
@@ -63,7 +63,7 @@
                     <item name="config" xsi:type="array">
                         <item name="type" xsi:type="string">enable</item>
                         <item name="label" xsi:type="string" translate="true">Enable</item>
-                        <item name="url" xsi:type="url" path="blog/action/enable"/>
+                        <item name="url" xsi:type="url" path="blog/post/enable"/>
                     </item>
                 </argument>
             </action>
@@ -72,16 +72,16 @@
                     <item name="config" xsi:type="array">
                         <item name="type" xsi:type="string">disable</item>
                         <item name="label" xsi:type="string" translate="true">Disable</item>
-                        <item name="url" xsi:type="url" path="blog/action/disable"/>
+                        <item name="url" xsi:type="url" path="blog/post/disable"/>
                     </item>
                 </argument>
             </action>
         </massaction>
     </listingToolbar>
-    <dataSource name="blog_index_listing_data_source">
+    <dataSource name="blog_post_listing_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
-            <argument name="name" xsi:type="string">blog_index_listing_data_source</argument>
+            <argument name="name" xsi:type="string">blog_post_listing_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">post_id</argument>
             <argument name="requestFieldName" xsi:type="string">id</argument>
             <argument name="data" xsi:type="array">
