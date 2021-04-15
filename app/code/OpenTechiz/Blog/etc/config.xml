@@ -3,7 +3,7 @@
     <default>
         <blog>
             <general>
-                    <template>reerferferfe_blog_comment_notification_email_template</template>
+                    <template>blog_comment_notification_email_template</template>
             </general>
         </blog>
     </default>
