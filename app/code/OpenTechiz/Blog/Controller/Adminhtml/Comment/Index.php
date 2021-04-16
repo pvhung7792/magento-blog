@@ -14,6 +14,7 @@ class Index extends \Magento\Backend\App\Action
         parent::__construct($context);
     }
 
+
     public function execute()
     {
         $resultPage = $this->_pageFactory->create();
@@ -26,6 +27,6 @@ class Index extends \Magento\Backend\App\Action
 
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('OpenTechiz_Blog::post');
+        return $this->_authorization->isAllowed('OpenTechiz_Blog::comment');
     }
 }

@@ -34,4 +34,5 @@ interface CommentRepositoryInterface
      * @return \OpenTechiz\Blog\Api\Data\CommentRepositoryInterface
      */
     public function getList(SearchCriteriaInterface $searchCriteria);
+
 }

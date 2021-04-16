@@ -1,82 +1,67 @@
 <?php
 namespace OpenTechiz\Blog\Helper;
 
-use Magento\Framework\App\Helper\Context;
-use Magento\Framework\Translate\Inline\StateInterface;
-use Magento\Framework\Escaper;
+use Magento\Framework\App\Area;
+use Magento\Store\Model\Store;
+use Mageplaza\Smtp\Helper\Data as SmtpData;
+use OpenTechiz\Blog\Api\Data\CommentInterface;
 use Magento\Framework\Mail\Template\TransportBuilder;
+use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Store\Model\StoreManager;
 
-class Email extends \Magento\Framework\App\Helper\AbstractHelper
+class Email
 {
-    /**
-     * @var StateInterface
-     */
-    protected $inlineTranslation;
-
-    /**
-     * @var Escaper
-     */
-    protected $escaper;
-
     /**
      * @var TransportBuilder
      */
-    protected $transportBuilder;
+    protected $_transportBuilder;
 
     /**
-     * @var \Psr\Log\LoggerInterface
+     * @var ScopeConfigInterface
      */
-    protected $logger;
+    protected $_scopeConfig;
 
     /**
-     * Email constructor.
-     * @param Context $context
-     * @param StateInterface $inlineTranslation
-     * @param Escaper $escaper
-     * @param TransportBuilder $transportBuilder
+     * @var StoreManager
      */
+    protected $_storeManager;
+
+
     public function __construct(
-        Context $context,
-        StateInterface $inlineTranslation,
-        Escaper $escaper,
-        TransportBuilder $transportBuilder
-    ) {
-        parent::__construct($context);
-        $this->inlineTranslation = $inlineTranslation;
-        $this->escaper = $escaper;
-        $this->transportBuilder = $transportBuilder;
-        $this->logger = $context->getLogger();
+        TransportBuilder $transportBuilder,
+        ScopeConfigInterface $scopeConfig,
+        StoreManager $storeManager
+    )
+    {
+        $this->_transportBuilder = $transportBuilder;
+        $this->_scopeConfig = $scopeConfig;
+        $this->_storeManager = $storeManager;
     }
 
     /**
-     * @param $email
+     * @param $reviceEmail
+     * @param array $templateValues
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\MailException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function sendEmail($email)
+    public function sendMail($reviceEmail,array $templateValues)
     {
-        try {
-            $this->inlineTranslation->suspend();
-            $sender = [
-                'name' => $this->escaper->escapeHtml('Test'),
-                'email' => $this->escaper->escapeHtml('owner@example.com'),
-            ];
-            $transport = $this->transportBuilder
-                ->setTemplateIdentifier('comment_notification_email')
-                ->setTemplateOptions(
-                    [
-                        'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
-                        'store' => \Magento\Store\Model\Store::DEFAULT_STORE_ID,
-                    ]
-                )
-                ->setTemplateVars([
-                    'name'  => 'My Topic',
-                ])
-                ->setFrom($sender)
-                ->addTo('pvhung7792@gmail.com')
-                ->getTransport();
-            $transport->sendMessage();
-            $this->inlineTranslation->resume();
-        } catch (\Exception $e) {
-            $this->logger->debug($e->getMessage());
-        }
+        $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
+
+        $transport = $this->_transportBuilder->setTemplateIdentifier($this->_scopeConfig->getValue('blog/general/template',$storeScope))
+            ->setTemplateOptions(
+                [
+                    'area'=> \Magento\Framework\App\Area::AREA_FRONTEND,
+                    'store'=> $this->_storeManager->getStore()->getId()
+                ]
+            )
+            ->setTemplateVars($templateValues)
+            ->setFrom($this->_scopeConfig->getValue('blog/general/sender_email',$storeScope))
+            ->addTo([$reviceEmail])
+            ->setReplyTo($reviceEmail)
+            ->getTransport();
+
+        $transport->sendMessage();
     }
 }

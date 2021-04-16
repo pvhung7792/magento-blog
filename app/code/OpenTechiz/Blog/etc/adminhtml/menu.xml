@@ -6,7 +6,7 @@
              title="Blog"
              module="OpenTechiz_Blog"
              sortOrder="41"
-             resource="OpenTechiz_Blog::menu"/>
+             resource="OpenTechiz_Blog::blog"/>
      <!--   <add
              id="OpenTechiz_Blog::parent"
              title="ViMagento Post"
@@ -20,23 +20,23 @@
              module="OpenTechiz_Blog"
              sortOrder="10"
              action="blog/post/index"
-             resource="OpenTechiz_Blog::post"
+             resource="OpenTechiz_Blog::postlist"
              parent="OpenTechiz_Blog::blog"/>
         <add
              id="OpenTechiz_Blog::add"
              title="New Blog"
              module="OpenTechiz_Blog"
              sortOrder="20"
-             parent="OpenTechiz_Blog::blog"
              action="blog/post/add"
-             resource="OpenTechiz_Blog::post"/>
+             parent="OpenTechiz_Blog::blog"
+             resource="OpenTechiz_Blog::addpost"/>
         <add
-            id="OpenTechiz_Blog::commentlist"
+            id="OpenTechiz_Blog::comment"
             title="Comment list"
             module="OpenTechiz_Blog"
             sortOrder="30"
             parent="OpenTechiz_Blog::blog"
             action="blog/comment/index"
-            resource="OpenTechiz_Blog::post"/>
+            resource="OpenTechiz_Blog::comment"/>
     </menu>
 </config>

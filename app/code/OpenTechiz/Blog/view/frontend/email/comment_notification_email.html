@@ -1,8 +1,10 @@
+{{template config_path="design/email/header_template"}}
 <table>
     <tr>
         <td><p>{{trans "Hello %user_name" user_name=$name}}</p></td>
     </tr>
     <tr>
-        <td>{{trans "we have recived ur email"}}</td>
+        <td>{{trans "%message" message=$message}}</td>
     </tr>
 </table>
+{{template config_path="design/email/footer_template"}}

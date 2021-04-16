@@ -2,11 +2,11 @@
     <?php if($block->isLogin()): ?>
     <?php $customer = $block->getCustomer(); ?>
         <div class="blog-comment-form">
-        <form action="../blog/comment/add" method="post" id="comment-form">
+        <form action="" method="post" id="comment-form">
             <input type="text" name="post_id" value="<?php echo $block->getPostId(); ?>" hidden>
             <input type="text" name="user_id" value="<?php echo $customer->getId(); ?>" hidden>
             <input type="text" name="email" value="<?php echo $customer->getEmail(); ?>" hidden>
-            <input type="text" name="first_name" value="<?php echo $customer->getFirstName(); ?>" hidden>
+            <input type="text" name="first_name" value="<?php echo $customer->getName(); ?>" hidden>
             <div class="form-input">
                 <label for="">
                     <b>Comment</b>
@@ -41,7 +41,7 @@
     </div>
 </div>
 <?php $form_url = $block->getFormAction(); ?>
-<!--
+
 <script type="text/javascript">
 
     require(['jquery','jquery/ui'], function($){
@@ -52,7 +52,7 @@
                 var param = dataFrom.serialize();
                 $.ajax({
                     type: "POST",
-                    url: "<?php /*echo $form_url; */?>",
+                    url: "<?php echo $form_url; ?>",
                     data: param
                 }).done(function( response ) {
                     console.log(response);
@@ -68,4 +68,4 @@
         })
     })
 
-</script>-->
+</script>

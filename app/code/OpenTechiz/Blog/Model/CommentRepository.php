@@ -161,4 +161,5 @@ class CommentRepository implements \OpenTechiz\Blog\Api\CommentRepositoryInterfa
 
         return $searchResults;
     }
+
 }

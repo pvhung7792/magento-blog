@@ -10,7 +10,7 @@ use Magento\Framework\Api\SortOrder;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Framework\DataObject\IdentityInterface;
 
-class Blogcomment extends \Magento\Framework\View\Element\Template
+class Blogcomment extends \Magento\Framework\View\Element\Template implements IdentityInterface
 {
     /**
      * @var CommentRepositoryInterface
@@ -148,4 +148,8 @@ class Blogcomment extends \Magento\Framework\View\Element\Template
         return $customer->getFirstname().' '.$customer->getlastname();
     }
 
+    public function getIdentities()
+    {
+        return $this->getComment()->getIdentities();
+    }
 }

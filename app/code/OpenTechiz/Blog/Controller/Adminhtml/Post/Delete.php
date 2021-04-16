@@ -8,10 +8,19 @@ use OpenTechiz\Blog\Model\ResourceModel\Post\CollectionFactory;
 
 class Delete extends Action
 {
+    /**
+     * @var PostRepositoryInterface
+     */
     protected $_postRepository;
 
+    /**
+     * @var Filter
+     */
     protected  $_filter;
 
+    /**
+     * @var CollectionFactory
+     */
     protected $_collectionFactory;
 
     public function __construct(Action\Context $context,
@@ -25,6 +34,10 @@ class Delete extends Action
         parent::__construct($context);
     }
 
+    /**
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|void
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
     public function execute()
     {
 //        $id = $this->getRequest()->getParam('selected');
@@ -44,6 +57,6 @@ class Delete extends Action
 
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('OpenTechiz_Blog::post');
+        return $this->_authorization->isAllowed('OpenTechiz_Blog::postlist');
     }
 }

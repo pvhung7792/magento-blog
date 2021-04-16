@@ -58,7 +58,7 @@ class Enable extends Action
             $post->setIsActive(1);
             $this->_commentRepository->save($post);
         }
-
+//        $this->_eventManager->dispatch("change_status_success", ['email' => ['email']]);
         if ($commentEnable) {
             $this->messageManager->addSuccessMessage(
                 __('A total of %1 record(s) have been enable.', $commentEnable)
@@ -73,6 +73,6 @@ class Enable extends Action
      */
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('OpenTechiz_Blog::post');
+        return $this->_authorization->isAllowed('OpenTechiz_Blog::comment');
     }
 }

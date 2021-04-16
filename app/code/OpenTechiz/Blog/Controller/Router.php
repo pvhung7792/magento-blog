@@ -41,12 +41,14 @@ class Router implements RouterInterface
             $request->setModuleName('blog')->setControllerName('view')->setActionName('Index')->setParam('post_id',$post_id);
             $request->setAlias(\Magento\Framework\Url::REWRITE_REQUEST_PATH_ALIAS,$url_key);
         }else{
-
-            /*$action = $url[1];
+            $action = isset($url[1])? $url[1] : 'index';
             $paramName = isset($url[2])? $url[2] : '';
             $param = isset($url[3])? $url[3] : '';
-
-            $request->setModuleName('blog')->setControllerName($controller)->setActionName($action);*/
+            if ($paramName){
+                $request->setModuleName('blog')->setControllerName($controller)->setActionName($action);
+            }else{
+                $request->setModuleName('blog')->setControllerName($controller)->setActionName($action);
+            }
         }
 
         return $this->actionFactory->create('Magento\Framework\App\Action\Forward');

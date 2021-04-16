@@ -25,6 +25,10 @@ class Enable extends Action
         parent::__construct($context);
     }
 
+    /**
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface|void
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
     public function execute()
     {
 //        $id = $this->getRequest()->getParam('selected');
@@ -51,6 +55,6 @@ class Enable extends Action
 
     protected function _isAllowed()
     {
-        return $this->_authorization->isAllowed('OpenTechiz_Blog::post');
+        return $this->_authorization->isAllowed('OpenTechiz_Blog::postlist');
     }
 }

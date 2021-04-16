@@ -9,10 +9,8 @@ use Magento\Framework\DataObject\IdentityInterface;
  * Class Post
  * @package OpenTechiz\Blog\Model
  */
-class Comment extends AbstractExtensibleModel implements CommentInterface
+class Comment extends AbstractExtensibleModel implements CommentInterface,IdentityInterface
 {
-    const CACHE_TAG = 'opentechiz_blog_comment';
-
     protected function _construct()
     {
         $this->_init(\OpenTechiz\Blog\Model\ResourceModel\Comment::class);
@@ -120,4 +118,11 @@ class Comment extends AbstractExtensibleModel implements CommentInterface
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getIdentities()
+    {
+        return [self::CACHE_TAG . '_' . $this->getId()];
+    }
 }

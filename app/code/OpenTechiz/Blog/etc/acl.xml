@@ -4,9 +4,9 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="OpenTechiz_Blog::blog" title="Blog Acl" sortOrder="100">
-                    <resource id="OpenTechiz_Blog::post" title="Posts" sortOrder="10"/>
-<!--                    <resource id="OpenTechiz_Blog::menu" title="Menu" sortOrder="20" />-->
-<!--                    <resource id="OpenTechiz_Blog::Configuration" title="Configuration" sortOrder="30" />-->
+                    <resource id="OpenTechiz_Blog::postlist" title="postlist" sortOrder="10"/>
+                    <resource id="OpenTechiz_Blog::addpost" title="add" sortOrder="20" />
+                    <resource id="OpenTechiz_Blog::comment" title="comment" sortOrder="30" />
                 </resource>
             </resource>
         </resources>

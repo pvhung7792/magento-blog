@@ -16,18 +16,39 @@ use Magento\Store\Model\StoreManager;
 
 class Add extends Action
 {
+    /**
+     * @var CommentRepositoryInterface
+     */
     protected $_commentRepository;
 
+    /**
+     * @var DateTime
+     */
     protected $_dateTime;
 
+    /**
+     * @var CommentInterface
+     */
     protected $_commentInterface;
 
+    /**
+     * @var JsonFactory
+     */
     protected $_resultFactory;
 
+    /**
+     * @var TransportBuilder
+     */
     protected $_transportBuilder;
 
+    /**
+     * @var ScopeConfigInterface
+     */
     protected $_scopeConfig;
 
+    /**
+     * @var StoreManager
+     */
     protected $_storeManager;
 
     public function __construct(\Magento\Framework\App\Action\Context $context,
@@ -50,6 +71,12 @@ class Add extends Action
         parent::__construct($context);
     }
 
+    /**
+     * @return \Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\Result\Json|\Magento\Framework\Controller\ResultInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\MailException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     */
     public function execute()
     {
         $data = $this->getRequest()->getPostValue();
@@ -78,21 +105,24 @@ class Add extends Action
         $transport = $this->_transportBuilder->setTemplateIdentifier($this->_scopeConfig->getValue('blog/general/template',$storeScope))
             ->setTemplateOptions(
                 [
-                    'area'=> \Magento\Backend\App\Area\FrontNameResolver::AREA_CODE,
+                    'area'=> \Magento\Framework\App\Area::AREA_FRONTEND,
                     'store'=> $this->_storeManager->getStore()->getId()
                 ]
             )
-            ->setTemplateVars(['name'=>$data['first_name']])
+            ->setTemplateVars([
+                'name'=>$data['first_name'],
+                'message'=>'We have recived your comment and we will approve it shortly!'
+                ])
             ->setFrom($this->_scopeConfig->getValue('blog/general/sender_email',$storeScope))
             ->addTo(['pvhung7792@gmail.com'])
             ->setReplyTo('pvhung7792@gmail.com')
             ->getTransport();
         $transport->sendMessage();
-        $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+        /*$resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
 
         $resultRedirect->setUrl($this->_redirect->getRefererUrl());
-        return $resultRedirect;
-//        return $jsonResultFactory;
+        return $resultRedirect;*/
+        return $jsonResultFactory;
     }
 }
 

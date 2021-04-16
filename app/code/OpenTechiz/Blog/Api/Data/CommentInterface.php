@@ -17,6 +17,7 @@ interface CommentInterface extends ExtensibleDataInterface
     const CONTENT = 'content';
     const CREATION_TIME = 'creation_time';
     const IS_ACTIVE = 'is_active';
+    const CACHE_TAG = 'opentechiz_comment';
 
     /**
      * @return int
@@ -83,4 +84,10 @@ interface CommentInterface extends ExtensibleDataInterface
      * @return $this
      */
     public function setIsActive($isActive);
+
+    /**
+     * Get identities.
+     * @return array
+     */
+    public function getIdentities();
 }
