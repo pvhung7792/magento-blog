@@ -3,7 +3,6 @@ namespace OpenTechiz\Blog\Api\Data;
 
 use Magento\Framework\Api\ExtensibleDataInterface;
 use Magento\Framework\Model\AbstractModel;
-
 /**
  * Interface CustomInterface
  * @package OpenTechiz\Blog\Api\Data
@@ -18,6 +17,8 @@ interface PostInterface extends ExtensibleDataInterface
     const CREATION_TIME = 'creation_time';
     const UPDATE_TIME = 'update_time';
     const IS_ACTIVE = 'is_active';
+    const CACHE_TAG = 'opentechiz_blog';
+
 
     /**
      * @return int
@@ -101,4 +102,10 @@ interface PostInterface extends ExtensibleDataInterface
      * @return int
      */
     public function checkUrlKey($url_key);
+
+    /**
+     * Get identities.
+     * @return array
+     */
+    public function getIdentities();
 }

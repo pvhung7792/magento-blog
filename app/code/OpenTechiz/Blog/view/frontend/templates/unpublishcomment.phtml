@@ -1,0 +1,18 @@
+<?php if($block->isLogin()): ?>
+    <?php if($block->getComments()): ?>
+        <h3>Your unpublishcomment: </h3>
+        <?php foreach($block->getComments() as $comment): ?>
+            <div class="post-comment" style="padding: 4px; background-color: lightblue; margin: 10px 0">
+                <div>
+                    <p><?php echo $block->getCustomerNameById($comment->getUserId()); ?></p>
+                </div>
+                <div>
+                    <p><?php echo $comment->getCreationTime(); ?></p>
+                </div>
+                <div class="comment-content" style="padding-left: 20px">
+                    <p><?php echo $comment->getContent(); ?></p>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php endif; ?>
+<?php endif; ?>

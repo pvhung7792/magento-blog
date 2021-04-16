@@ -3,8 +3,9 @@ namespace OpenTechiz\Blog\Block;
 
 use Magento\Framework\View\Element\Template;
 use OpenTechiz\Blog\Api\PostRepositoryInterface;
+use Magento\Framework\DataObject\IdentityInterface;
 
-class Blogdetail extends \Magento\Framework\View\Element\Template
+class Blogdetail extends \Magento\Framework\View\Element\Template implements IdentityInterface
 {
     /**
      * @var PostRepositoryInterface
@@ -35,5 +36,10 @@ class Blogdetail extends \Magento\Framework\View\Element\Template
         $blog = $this->_postRepository->getById($post_id);
 
         return $blog;
+    }
+
+    public function getIdentities()
+    {
+        return $this->getBlogData()->getIdentities();
     }
 }

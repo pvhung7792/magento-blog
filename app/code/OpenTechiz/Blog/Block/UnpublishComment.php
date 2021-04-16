@@ -9,7 +9,7 @@ use OpenTechiz\Blog\Api\CommentRepositoryInterface;
 use Magento\Framework\Api\SortOrder;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 
-class Blogcomment extends \Magento\Framework\View\Element\Template
+class UnpublishComment extends \Magento\Framework\View\Element\Template
 {
     /**
      * @var CommentRepositoryInterface
@@ -67,9 +67,10 @@ class Blogcomment extends \Magento\Framework\View\Element\Template
     public function getComments()
     {
         $post_id = $this->getRequest()->getParam('post_id');
+        $customer_id = $this->getCustomer()->getId();
 
         $filterIsActive = $this->filterBuilder->setField('main_table.is_active')
-            ->setValue(1)
+            ->setValue(2)
             ->setConditionType('eq')
             ->create();
 
@@ -78,41 +79,25 @@ class Blogcomment extends \Magento\Framework\View\Element\Template
             ->setConditionType('eq')
             ->create();
 
+        $filterByUserId = $this->filterBuilder->setField('main_table.user_id')
+            ->setValue($customer_id)
+            ->setConditionType('eq')
+            ->create();
+
         $this->sortOrder->setField('creation_time')
-                        ->setDirection('DESC');
+            ->setDirection('DESC');
 
         $filterByPostId = $this->filterGroupBuilder->setFilters([$filterByPostId])->create();
         $filterIsActive = $this->filterGroupBuilder->setFilters([$filterIsActive])->create();
+        $filterByUserId = $this->filterGroupBuilder->setFilters([$filterByUserId])->create();
 
-        $this->searchCriteriaBuilder->setFilterGroups([$filterByPostId,$filterIsActive]);
+        $this->searchCriteriaBuilder->setFilterGroups([$filterByPostId,$filterIsActive,$filterByUserId]);
         $this->searchCriteriaBuilder->setSortOrders([$this->sortOrder]);
 
         $commentList = $this->commentRepository->getList($this->searchCriteriaBuilder->create())->getItems();
 
         return $commentList;
     }
-
-    /**
-     * @return int
-     */
-
-    public function getPostId()
-    {
-        return $this->getRequest()->getParam('post_id');
-    }
-
-    /**
-     * @return string
-     */
-
-    public function getFormAction()
-    {
-        return $this->getUrl('blog/comment/add');
-    }
-
-    /**
-     * @return mixed|null
-     */
 
     public function isLogin()
     {

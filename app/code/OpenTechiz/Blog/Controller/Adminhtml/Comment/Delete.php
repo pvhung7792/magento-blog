@@ -50,10 +50,16 @@ class Delete extends Action
 //        $id = $this->getRequest()->getParam('selected');
         $collection = $this->_filter->getCollection($this->_collectionFactory->create() );
         $postDelete = 0;
-        foreach ($collection as $post){
-            $this->_commentRepository->deleteById($post->getId());
+        $cacheTags = [];
+        foreach ($collection as $comment){
+            $this->_commentRepository->deleteById($comment->getId());
             $postDelete++;
+            $cacheTags[] = $comment->getIdentities();
         }
+        if (!empty($cacheTags)){
+            $this->_eventManager->dispatch("change_status_success", ['tag' => $cacheTags]);
+        }
+
         if ($postDelete) {
             $this->messageManager->addSuccessMessage(
                 __('A total of %1 record(s) have been delete.', $postDelete)

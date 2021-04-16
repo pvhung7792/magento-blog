@@ -13,10 +13,10 @@ class Index extends \Magento\Framework\App\Action\Action
         return parent::__construct($context);
     }
 
-
     public function execute()
     {
         $pageResult = $this->_pageFactory->create();
+        $pageResult->setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0', true);
         return $pageResult;
     }
 }

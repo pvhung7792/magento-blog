@@ -50,17 +50,20 @@ class Disable extends Action
 //        $id = $this->getRequest()->getParam('selected');
         $collection = $this->_filter->getCollection($this->_collectionFactory->create());
         $commentDisable = 0;
-
-        foreach($collection as $post){
+        $cacheTags = [];
+        foreach($collection as $comment){
 //            $post->setId($post_id);
-            if ($post->isActive() != 0){
+            if ($comment->isActive() != 0){
                 $commentDisable++;
+                $cacheTags[] = $comment->getIdentities();
             }
 
-            $post->setIsActive(0);
-            $this->_commentRepository->save($post);
+            $comment->setIsActive(0);
+            $this->_commentRepository->save($comment);
         }
-
+        if (!empty($cacheTags)){
+            $this->_eventManager->dispatch("change_status_success", ['tag' => $cacheTags]);
+        }
         if ($commentDisable) {
             $this->messageManager->addSuccessMessage(
                 __('A total of %1 record(s) have been disable.', $commentDisable)

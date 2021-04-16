@@ -48,17 +48,23 @@ class Enable extends Action
     public function execute()
     {
 //        $id = $this->getRequest()->getParam('selected');
-        $collection = $this->_filter->getCollection($this->_collectionFactory->create() );
+        $collection = $this->_filter->getCollection($this->_collectionFactory->create());
         $commentEnable = 0;
-        foreach ($collection as $post){
+        $cacheTags = [];
+        foreach ($collection as $comment){
 //            $post->setId($post_id);
-            if ($post->isActive() != 1){
+            if ($comment->isActive() != 1){
                 $commentEnable++;
+                $cacheTags[] = $comment->getIdentities();
             }
-            $post->setIsActive(1);
-            $this->_commentRepository->save($post);
+
+            $comment->setIsActive(1);
+            $this->_commentRepository->save($comment);
         }
-//        $this->_eventManager->dispatch("change_status_success", ['email' => ['email']]);
+        if (!empty($cacheTags)){
+            $this->_eventManager->dispatch("change_status_success", ['tag' => $cacheTags]);
+        }
+
         if ($commentEnable) {
             $this->messageManager->addSuccessMessage(
                 __('A total of %1 record(s) have been enable.', $commentEnable)

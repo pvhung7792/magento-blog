@@ -48,7 +48,7 @@ class CommentCount
     public function countCommentInActive()
     {
         $filterInActive = $this->filterBuilder->setField('main_table.is_active')
-            ->setValue(0)
+            ->setValue(2)
             ->setConditionType('eq')
             ->create();
 

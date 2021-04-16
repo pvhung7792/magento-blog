@@ -4,12 +4,13 @@ namespace OpenTechiz\Blog\Model;
 
 use Magento\Framework\Model\AbstractExtensibleModel;
 use OpenTechiz\Blog\Api\Data\PostInterface;
+use Magento\Framework\DataObject\IdentityInterface;
 
 /**
  * Class Post
  * @package OpenTechiz\Blog\Model
  */
-class Post extends AbstractExtensibleModel implements PostInterface
+class Post extends AbstractExtensibleModel implements PostInterface,IdentityInterface
 {
     /*const POST_ID = 'post_id';
     const URL_KEY = 'url_key';
@@ -157,5 +158,13 @@ class Post extends AbstractExtensibleModel implements PostInterface
     public function checkUrlKey($url_key)
     {
         return $this->_getResource()->checkUrlKey($url_key);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIdentities()
+    {
+        return [self::CACHE_TAG . '_' . $this->getId()];
     }
 }

@@ -36,12 +36,12 @@ class Enable extends Action
         $postEnable = 0;
         foreach ($collection as $post){
 //            $post->setId($post_id);
-            if ($post->isActive() != 1){
+            if ($post->isActive() != 1)
+            {
                 $postEnable++;
             }
             $post->setIsActive(1);
             $this->_postRepository->save($post);
-
         }
 
         if ($postEnable) {

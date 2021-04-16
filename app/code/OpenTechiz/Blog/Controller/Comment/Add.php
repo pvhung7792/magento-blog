@@ -13,6 +13,7 @@ use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Mail\Template\TransportBuilder;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Store\Model\StoreManager;
+use OpenTechiz\Blog\Api\PostRepositoryInterface;
 
 class Add extends Action
 {
@@ -51,6 +52,11 @@ class Add extends Action
      */
     protected $_storeManager;
 
+    /**
+     * @var PostRepositoryInterface
+     */
+    protected $_postRepository;
+
     public function __construct(\Magento\Framework\App\Action\Context $context,
                                 CommentRepositoryInterface $commentRepository,
                                 DateTime $dateTime,
@@ -58,7 +64,8 @@ class Add extends Action
                                 JsonFactory $jsonFactory,
                                 TransportBuilder $transportBuilder,
                                 ScopeConfigInterface $scopeConfig,
-                                StoreManager $storeManager
+                                StoreManager $storeManager,
+                                PostRepositoryInterface $postRepository
     )
     {
         $this->_dateTime = $dateTime;
@@ -68,6 +75,7 @@ class Add extends Action
         $this->_transportBuilder = $transportBuilder;
         $this->_scopeConfig = $scopeConfig;
         $this->_storeManager = $storeManager;
+        $this->_postRepository = $postRepository;
         parent::__construct($context);
     }
 
@@ -86,7 +94,7 @@ class Add extends Action
         $comment->setUserId($data['user_id']);
         $comment->setContent($data['content']);
         $comment->setPostId($data['post_id']);
-        $comment->setIsActive(0);
+        $comment->setIsActive(2);
         $comment->setCreationTime($this->_dateTime->gmtDate());
 
         $jsonResultFactory = $this->_resultFactory->create();
@@ -118,6 +126,12 @@ class Add extends Action
             ->setReplyTo('pvhung7792@gmail.com')
             ->getTransport();
         $transport->sendMessage();
+
+        $post = $this->_postRepository->getById($data['post_id']);
+        $cacheTags[] = $post->getIdentities();
+        if (!empty($cacheTags)){
+            $this->_eventManager->dispatch("change_status_success", ['tag' => $cacheTags]);
+        }
         /*$resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
 
         $resultRedirect->setUrl($this->_redirect->getRefererUrl());

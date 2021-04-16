@@ -4,12 +4,11 @@ namespace OpenTechiz\Blog\Model;
 
 use Magento\Framework\Model\AbstractExtensibleModel;
 use OpenTechiz\Blog\Api\Data\CommentInterface;
-use Magento\Framework\DataObject\IdentityInterface;
 /**
  * Class Post
  * @package OpenTechiz\Blog\Model
  */
-class Comment extends AbstractExtensibleModel implements CommentInterface,IdentityInterface
+class Comment extends AbstractExtensibleModel implements CommentInterface
 {
     protected function _construct()
     {
@@ -118,11 +117,4 @@ class Comment extends AbstractExtensibleModel implements CommentInterface,Identi
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getIdentities()
-    {
-        return [self::CACHE_TAG . '_' . $this->getId()];
-    }
 }
