@@ -39,6 +39,7 @@ class UnpublishComment extends \Magento\Framework\View\Element\Template
     /**
      * @var CustomerRepositoryInterface
      */
+
     protected $_customerRepositoryInterface;
 
     public function __construct(
@@ -48,9 +49,10 @@ class UnpublishComment extends \Magento\Framework\View\Element\Template
         FilterGroupBuilder $filterGroupBuilder,
         FilterBuilder $filterBuilder,
         SortOrder $sortOrder,
-        CustomerRepositoryInterface $customerRepository
+        CustomerRepositoryInterface $customerRepository,
+        $data=[]
     ) {
-        parent::__construct($context);
+        parent::__construct($context,$data);
         $this->commentRepository = $commentRepository;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->filterGroupBuilder = $filterGroupBuilder;
@@ -64,18 +66,10 @@ class UnpublishComment extends \Magento\Framework\View\Element\Template
      * @throws \Magento\Framework\Exception\InputException
      */
 
-    public function getComments()
+    public function getComments($customer_id)
     {
-        $post_id = $this->getRequest()->getParam('post_id');
-        $customer_id = $this->getCustomer()->getId();
-
         $filterIsActive = $this->filterBuilder->setField('main_table.is_active')
             ->setValue(2)
-            ->setConditionType('eq')
-            ->create();
-
-        $filterByPostId = $this->filterBuilder->setField('main_table.post_id')
-            ->setValue($post_id)
             ->setConditionType('eq')
             ->create();
 
@@ -87,11 +81,10 @@ class UnpublishComment extends \Magento\Framework\View\Element\Template
         $this->sortOrder->setField('creation_time')
             ->setDirection('DESC');
 
-        $filterByPostId = $this->filterGroupBuilder->setFilters([$filterByPostId])->create();
         $filterIsActive = $this->filterGroupBuilder->setFilters([$filterIsActive])->create();
         $filterByUserId = $this->filterGroupBuilder->setFilters([$filterByUserId])->create();
 
-        $this->searchCriteriaBuilder->setFilterGroups([$filterByPostId,$filterIsActive,$filterByUserId]);
+        $this->searchCriteriaBuilder->setFilterGroups([$filterIsActive,$filterByUserId]);
         $this->searchCriteriaBuilder->setSortOrders([$this->sortOrder]);
 
         $commentList = $this->commentRepository->getList($this->searchCriteriaBuilder->create())->getItems();
@@ -117,6 +110,7 @@ class UnpublishComment extends \Magento\Framework\View\Element\Template
         $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
         $customerSession = $objectManager->create('Magento\Customer\Model\Session');
         return $customerSession->getCustomer();
+
     }
 
     /**

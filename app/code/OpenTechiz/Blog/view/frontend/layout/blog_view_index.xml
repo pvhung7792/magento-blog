@@ -7,7 +7,19 @@
     <body>
         <referenceContainer name="content">
             <block class="OpenTechiz\Blog\Block\Blogdetail" name="blogdetail" template="OpenTechiz_Blog::blogdetail.phtml" />
-            <block class="OpenTechiz\Blog\Block\UnpublishComment" name="unpublish_comment" template="OpenTechiz_Blog::unpublishcomment.phtml" />
+            <block class="OpenTechiz\Blog\Block\UnpublishComment" name="unpublish_comment" template="OpenTechiz_Blog::unpublishcomment.phtml">
+                <arguments>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="custom_section" xsi:type="array">
+                                <item name="component" xsi:type="string">
+                                    OpenTechiz_Blog/js/view/custom_section
+                                </item>
+                            </item>
+                        </item>
+                    </argument>
+                </arguments>
+            </block>
             <block class="OpenTechiz\Blog\Block\Blogcomment" name="blogcomment" template="OpenTechiz_Blog::blogcomment.phtml" />
         </referenceContainer>
     </body>

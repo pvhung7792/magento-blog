@@ -104,7 +104,7 @@ class Post extends AbstractExtensibleModel implements PostInterface,IdentityInte
      */
     public function getUrl()
     {
-        return "/view/".$this->_getData(self::URL_KEY);
+        return "/view/".$this->_getData(self::URL_KEY).".html";
     }
 
     /**

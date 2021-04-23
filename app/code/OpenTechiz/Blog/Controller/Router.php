@@ -30,7 +30,7 @@ class Router implements RouterInterface
         $controller = $url[0];
 
         if ($controller == 'view'){
-            $url_key = $url[1];
+            $url_key = str_replace('.html','',$url[1]);
             $post= $this->_postFactory->create();
             $post_id= $post->checkUrlKey($url_key);
             if  (!$post_id)

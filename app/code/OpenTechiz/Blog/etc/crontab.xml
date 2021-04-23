@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
     <group id="default">
         <job name="send_email_remind_admin" instance="OpenTechiz\Blog\Cron\RemindAdmin" method="sendMail">
-            <schedule>* * * * *</schedule>
+            <schedule>15 9 * * *</schedule>
         </job>
     </group>
 </config>

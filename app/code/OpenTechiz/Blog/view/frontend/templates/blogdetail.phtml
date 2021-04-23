@@ -11,5 +11,6 @@ $blog = $block->getBlogData();
 <p><?php echo __('Content: ').$blog->getContent();?></p>
 <p><?php echo __('Created at: ').$blog->getCreationTime();?></p>
 <p><?php echo __('Updated at: ').$blog->getUpdateTime();?></p>
+<input type="text" id="post_id" value="<?php echo $blog->getId();?>" hidden>
 
 

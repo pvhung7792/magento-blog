@@ -1,18 +1,20 @@
-<?php if($block->isLogin()): ?>
-    <?php if($block->getComments()): ?>
-        <h3>Your unpublishcomment: </h3>
-        <?php foreach($block->getComments() as $comment): ?>
-            <div class="post-comment" style="padding: 4px; background-color: lightblue; margin: 10px 0">
-                <div>
-                    <p><?php echo $block->getCustomerNameById($comment->getUserId()); ?></p>
-                </div>
-                <div>
-                    <p><?php echo $comment->getCreationTime(); ?></p>
-                </div>
-                <div class="comment-content" style="padding-left: 20px">
-                    <p><?php echo $comment->getContent(); ?></p>
-                </div>
+<?php if ($block->isLogin()): ?>
+<h3>Your unpublish comment:</h3>
+<div data-role="custom-section" data-bind="scope: 'custom_section'">
+    <div class="content-type" data-bind="foreach: custom_section().comments">
+        <div data-bind="if: ($data.post_id == document.getElementById('post_id').value )" >
+            <div style="padding: 5px; margin: 3px;background-color: aqua">
+                <p data-bind="text: $data.creation_time"></p>
+                <p data-bind="text: $data.comment"></p>
             </div>
-        <?php endforeach; ?>
-    <?php endif; ?>
+        </div>
+    </div>
+</div>
 <?php endif; ?>
+<script type="text/x-magento-init">
+{
+    "[data-role=custom-section]": {
+        "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout(); ?>
+    }
+}
+</script>
